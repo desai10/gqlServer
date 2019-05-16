@@ -1,0 +1,11 @@
+{
+  "name": "gqlserver",
+  "version": "1.0.0",
+  "description": "Demo GraphQL Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "desai",
+  "license": "ISC"
+}
