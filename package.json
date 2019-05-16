@@ -4,7 +4,8 @@
   "description": "Demo GraphQL Server",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "babel-node src/index.js",
+    "startDev": "nodemon babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "desai",
