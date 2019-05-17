@@ -336,7 +336,4 @@ let theData = [
 		release_date: '2019-03-14'
 	}
 ];
-
-export {
-    theData
-};
+module.exports.theData = theData

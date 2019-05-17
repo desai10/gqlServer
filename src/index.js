@@ -1,10 +1,10 @@
-import cors from 'cors';
-import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
+const cors = require('cors');
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
 
-import { theData } from './dummyData';
-import resolvers from './resolvers';
-import schema from './schema';
+const { theData } = require('./dummyData');
+const resolvers = require('./resolvers');
+const schema = require('./schema');
 
 
 const app = express();
@@ -21,6 +21,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, path: '/graphql' });
 
+const port = process.env.PORT || 8080;
 app.listen({ port: 8000 }, () => {
     console.log('Apollo Server on http://localhost:8000/graphql');
 });

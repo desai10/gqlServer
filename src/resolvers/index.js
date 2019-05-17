@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     Query: {
         nowRunningMovies: (parent, args, { theData }) => {
             return theData;
