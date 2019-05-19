@@ -7,6 +7,8 @@ const { theData } = require('./dummyData');
 const resolvers = require('./resolvers');
 const schema = require('./schema');
 
+const { models, sequelize } = require('./models');
+
 const app = express();
 
 app.use(cors());
@@ -17,7 +19,8 @@ const server = new ApolloServer({
     typeDefs: schema,
     resolvers,
     context: {
-        theData
+        theData,
+        models
     }
 });
 
@@ -27,6 +30,20 @@ const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 const port = process.env.PORT || 8000;
-httpServer.listen({ port }, () => {
-    console.log('Apollo Server on http://localhost:8000/graphql');
+const eraseDatabaseOnSync = true;
+
+sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
+    if (eraseDatabaseOnSync) {
+        addDummyData();
+    }
+    httpServer.listen({ port }, () => {
+        console.log('Apollo Server on http://localhost:8000/graphql');
+    });
 });
+
+const addDummyData = async () => {
+    await models.Claps.create({
+        id: 447404,
+        claps: 21
+    });
+}
