@@ -30,20 +30,10 @@ const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 const port = process.env.PORT || 8000;
-const eraseDatabaseOnSync = true;
+const eraseDatabaseOnSync = false;
 
 sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
-    if (eraseDatabaseOnSync) {
-        addDummyData();
-    }
     httpServer.listen({ port }, () => {
         console.log('Apollo Server on http://localhost:8000/graphql');
     });
 });
-
-const addDummyData = async () => {
-    await models.Claps.create({
-        id: 447404,
-        claps: 21
-    });
-}

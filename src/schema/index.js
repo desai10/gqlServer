@@ -3,6 +3,11 @@ const { gql } = require('apollo-server-express');
 module.exports = gql`
 	type Query {
 		nowRunningMovies: [Movie]
+		movie(id: Int!): Movie
+	}
+
+	type Mutation {
+		clap(id: Int!): Movie!
 	}
 
 	type Movie {
@@ -11,7 +16,7 @@ module.exports = gql`
 		vote_count: Int
 		vote_average: Float
 		popularity: Float
-		poster: String
+		poster_path: String
 		original_language: String
 		original_title: String
 		backdrop_path: String
@@ -21,5 +26,9 @@ module.exports = gql`
 		title: String
 		claps: Int
 		similarMovies: [Movie]
+	}
+
+	type Subscription {
+		clapsChangedFor(id: Int!): Movie
 	}
 `;
