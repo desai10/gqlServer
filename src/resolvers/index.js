@@ -23,6 +23,27 @@ module.exports = {
 					resolve(JSON.parse(body)['results']);
 				});
 			});
+		},
+		movie: (parent, { id }) => {
+			return new Promise((resolve, reject) => {
+				var options = {
+					method: 'GET',
+					url: 'https://api.themoviedb.org/3/movie/' + id,
+					qs: {
+						api_key:
+							process.env.TMDB_API_KEY ||
+							'260465034a27680187bf3f997beccf9d'
+					},
+					body: '{}'
+				};
+
+				request(options, function (error, response, body) {
+					if (error) reject(error);
+
+					console.log(response);
+					resolve(JSON.parse(body));
+				});
+			});
 		}
 	},
 	Movie: {
