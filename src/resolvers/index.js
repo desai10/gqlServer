@@ -75,17 +75,18 @@ module.exports = {
 				});
 			});
 		}
-	},
+	}, 
 	Mutation: {
 		clap: async (parent, { id }, { models }) => {
-            let incResult =  await models.Claps.incrementClaps(id);
-            pubsub.publish(eventName + id, incResult);
+			let incResult =  await models.Claps.incrementClaps(id);
+			console.log(incResult);
+            pubsub.publish(eventName + id, { clapsChangedFor: incResult });
             return incResult;
 		}
 	},
 	Subscription: {
 		clapsChangedFor: {
-			subscribe: (parent, { id }) => pubsub.asyncIterator(eventName + id)
+			subscribe: (parent, { id }) => pubsub.asyncIterator([eventName + id])
 		}
 	}
 };
